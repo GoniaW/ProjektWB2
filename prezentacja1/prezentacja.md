@@ -8,3 +8,4 @@
 * [Ordered Logit Model](https://en.wikipedia.org/wiki/Ordered_logit)
 * [Ogólne zagadnienie - opis, wikipedia](https://en.wikipedia.org/wiki/Ordinal_regression)
 * [Pakiet Pythonowy](https://pythonhosted.org/mord/)
+* [Przegląd metryk](https://link.springer.com/chapter/10.1007/978-3-642-01818-3_25)
