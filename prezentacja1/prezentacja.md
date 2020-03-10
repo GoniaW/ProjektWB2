@@ -7,3 +7,4 @@
 * [Implementacja artykułu Gosi w Python z analizami (w tym na Wine-Quality)](https://github.com/sarvothaman/ordinal-classification/blob/master/ordinal-classification.ipynb)
 * [Ordered Logit Model](https://en.wikipedia.org/wiki/Ordered_logit)
 * [Ogólne zagadnienie - opis, wikipedia](https://en.wikipedia.org/wiki/Ordinal_regression)
+* [Pakiet Pythonowy](https://pythonhosted.org/mord/)
