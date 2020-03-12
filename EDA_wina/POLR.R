@@ -46,10 +46,17 @@ mse <- function(x,y){
   mean((as.integer(x)-as.integer(y))^2)
 }
 
-mse(test_ds$Class, m1_pred)
+acc <- function(x,y){
+  mean(x == y)
+}
 
 m2 <- glmnet::glmnet(x = as.matrix(train_ds[, -12]), y = as.matrix(train_ds[,12]), family = "multinomial")
 
-m2_pred <- predict(m2, as.matrix(test_ds[,-12]), type = "class" )
+m2_pred <- predict(m2, newx=as.matrix(test_ds[,-12]), type="class")
 
+mse(test_ds$Class, m1_pred)
 mse(test_ds$Class, m2_pred)
+
+acc(test_ds$Class, m1_pred)
+acc(test_ds$Class, m2_pred)
+
