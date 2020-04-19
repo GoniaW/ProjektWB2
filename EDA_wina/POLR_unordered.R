@@ -29,11 +29,13 @@ Output variable (based on sensory data):
 12 - quality (score between 0 and 10)
 """
 
-
+# ---------------------------------------------------------------------------
+# - KONWERSJA DANYCH
 
 data <- data[data$Class!=7 & data$Class!=1,]
+#data[,-12] <- scale(data[,-12])
 data$Class <- as.factor(data$Class)
-data$Class <- ordered(data$Class)
+#data$Class <- ordered(data$Class)
 features <- data[, -12]
 set.seed(999)
 train_index <- createDataPartition(data$Class, p=0.8, list=FALSE, times = 1)
@@ -42,6 +44,8 @@ train_ds <- data[train_index,]
 test_ds <- data[-train_index,]
 
 mse <- function(x,y){
+  print(y)
+  print(as.integer(y))
   mean((as.integer(x)-as.integer(y))^2)
 }
 
@@ -56,8 +60,9 @@ acc1 <- function(x,y){
 m1 <- polr(Class ~ ., data = train_ds, Hess=TRUE)
 m1_pred <- predict(m1, test_ds)
 
-m2 <- glmnet::glmnet(x = as.matrix(train_ds[, -12]), y = as.matrix(train_ds[,12]), family = "multinomial", alpha=0.5)
-m2_pred <- predict(m2, newx=as.matrix(test_ds[,-12]), type="class")
+library(nnet)
+m2 <- nnet::multinom(Class ~ ., data = train_ds)
+m2_pred <- predict(m2, test_ds)
 
 mse(test_ds$Class, m1_pred)
 mse(test_ds$Class, m2_pred)
@@ -68,14 +73,20 @@ acc(test_ds$Class, m2_pred)
 #----------------------------------------------------------------------------------------
 
 convert <- function(x){
-tresholds <- as.numeric(levels(train_ds$Class))
-tresholds <- tresholds[-length(tresholds)]
-lables <- matrix(ncol = 4, nrow = nrow(x))
-for(i in 1:nrow(x)){
-  lables[i,] <- as.logical(as.numeric(x$Class[i]) > tresholds)
-}
-lables
-list(cbind(train_ds[,-12], a=lables[,1]), cbind(train_ds[,-12], b=lables[,2]), cbind(train_ds[,-12], c=lables[,3]), cbind(train_ds[,-12], d=lables[,4]))
+  #tresholds <- as.numeric(levels(train_ds$Class)) 
+  tresholds <- c(2,3,4,5,6)
+  tresholds <- tresholds[-length(tresholds)]
+  #print("Tresholds")
+  #print(tresholds-1)
+  lables <- matrix(ncol = 4, nrow = nrow(x))
+  for(i in 1:nrow(x)){
+    #print("Klasa. Wartości logiczne")
+    #print(x$Class[i])
+    #print(as.numeric(x$Class[i]) > (tresholds-1))
+    lables[i,] <- as.logical(as.numeric(x$Class[i]) > (tresholds-1))
+  }
+  lables
+  list(cbind(train_ds[,-12], a=lables[,1]), cbind(train_ds[,-12], b=lables[,2]), cbind(train_ds[,-12], c=lables[,3]), cbind(train_ds[,-12], d=lables[,4]))
 }
 
 #-------------------------------------------------------------------------------------------
@@ -108,26 +119,52 @@ for(i in 1:4){
   df <- stack[[i]]
   target_name <- colnames(df)[ncol(df)]
   m <- ranger(paste(c(target_name, " ~ ."), collapse = ""), data = df)
-  #m <- glm(paste(c(target_name, " ~ ."), collapse = ""), data = df, family = "binomial")
+  #glm(paste(c(target_name, " ~ ."), collapse = ""), data = df, family = "binomial")
   #m <- glmnet::glmnet(x = as.matrix(stack[[i]][, -12]), y = as.matrix(stack[[i]][,12]), family = "binomial", alpha=0.5)
   m_pred <- predict(m, test_ds[,-12], type="response")
   responses[[i]] <-  m_pred$predictions
 }
 m3_pred <- calc_prob(responses)
 
+#----------------------------------------------------------
+m4 <- ranger(Class ~ ., train_ds)
+m4_pred <- predict(m4, test_ds, type = "response")
+m4_pred <- m4_pred$predictions
 
 # ----------------------------------------------------------------
 
+responses_logit <- list()
+
+for(i in 1:4){
+  print(i)
+  df <- stack[[i]]
+  target_name <- colnames(df)[ncol(df)]
+  m <- multinom(paste(c(target_name, " ~ ."), collapse = ""), data = df)
+  #glm(paste(c(target_name, " ~ ."), collapse = ""), data = df, family = "binomial")
+  #m <- glmnet::glmnet(x = as.matrix(stack[[i]][, -12]), y = as.matrix(stack[[i]][,12]), family = "binomial", alpha=0.5)
+  m_pred <- predict(m, test_ds[,-12], type="probs")
+  responses[[i]] <-  m_pred
+}
+m5_pred <- calc_prob(responses)
+
+# ----------------------------------------
+
 mse(test_ds$Class, m1_pred)
-mse(test_ds$Class, m2_pred)
+mse(test_ds$Class, m2_pred) # logit
 mse(test_ds$Class, m3_pred)
+mse(test_ds$Class, m4_pred)
+mse(test_ds$Class, m5_pred) # paper + logit
 
 acc(test_ds$Class, m1_pred)
 acc(test_ds$Class, m2_pred)
 acc(test_ds$Class, m3_pred)
+acc(test_ds$Class, m4_pred)
+acc(test_ds$Class, m5_pred)
 
 
 acc1(test_ds$Class, m1_pred)
 acc1(test_ds$Class, m2_pred)
 acc1(test_ds$Class, m3_pred)
+acc1(test_ds$Class, m4_pred)
+acc1(test_ds$Class, m5_pred)
 
