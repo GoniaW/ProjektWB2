@@ -11,3 +11,4 @@ Projekt na Warsztaty Badawcze 2
 | oryginalny | classif.xgboost | predict.type = "response", objective = "multi:softmax", nrounds = 200 | 0.6084337 | 0.8533 |  to-do | Gosia | bez NA w Utitlity i pustych obserwacji, z lokalizacją |
 | oryginalny | classif.rpart | domyślne | 0.6024096 | 0.836 |  to-do | Gosia | bez NA w Utitlity i pustych obserwacji, z lokalizacją |
 | oryginalny | classif.rpart x3 (z paperu) | domyślne | - | 0.8525 | Eucalyptus/eucalyptus_original_ordinal_classification(paper).R | Karol | preprocessing Gosi + usunięcie NA |
+| oryginalny | classif.rpart | tuning | 0.6272727 | 0.8263 | to-do | Ola | bez NA w Utitlity  |
