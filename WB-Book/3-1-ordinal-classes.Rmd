@@ -16,6 +16,25 @@
 
 ### Methodology
 
+#### Initial preprocessing
+
+The aim of this article was to build the best interpretable model for an ordinal classification problem and comparing it to a black box model. First undertaken step was dividing the data into training and test sets, consisting of 70% and 30% of all data, respectively. Since the considered dataset has a categorical target variable, the division was done using random sampling within each class of the target variable in an attempt to balance the class distributions within the splits. A seed was used to assure the same split in each tested model.
+
+In order to get a legitimate comparison, the data was initially preprocessed in such a way as to assure that both models’ performances are compared on the same test set. This initial preprocessing included:
+
+1. deleting the observations with ‘none’ value in the target variable from both the training set and the test set;
+
+2. deleting observations with missing values from test set, resulting in a 6% decease of the test set observations.
+
+It is important to note that missing values are still present in the training set. 
+
+The reason why the missing data is deleted from the test set is that many of the explainable models cannot be run with missing data present. This means that the missing values will have to either be deleted or imputed later on. This leads to a possibility that the explainable model will impute missing data differently than the black box model, resulting in two different tests sets. And, if - instead of imputing missing data - we decide to delete it in order to make running explainable model possible, then the obtained test sets will differ in number of rows, making it impossible to draw any meaningful conclusions. Hence the missing data were deleted from the test set.
+
+#### Running the black box model 
+
+#### Running the basic version the explainable model
+
+#### Improving the explainable model
 
 ### Results
 
