@@ -32,6 +32,18 @@ The reason why the missing data is deleted from the test set is that many of the
 
 #### Running the black box model 
 
+The black box model chosen for comparison is an extreme gradient boosting model. After the initial preprocessing the xgboost model was trained on the training set and used to predict results on the test set. As this model can only deal with numerical data, categorical (factor) variables were transformed using one hot encoding. The training proces and prediction were done using the mlr package in R, and the exact model specifications were the following:
+
+* Learner classif.xgboost from package xgboost
+* Type: classif
+* Name: eXtreme Gradient Boosting; Short name: xgboost
+* Class: classif.xgboost
+* Properties: twoclass,multiclass,numerics,prob,weights,missings,featimp
+* Predict-Type: response
+* Hyperparameters: nrounds=200,verbose=0,objective=multi:softmax
+
+The quality of prediction was measured using the AUC (area under ROC curve) measure. This provides the base for this research, to which other models’ results will be compared to.
+
 #### Running the basic version the explainable model
 
 #### Improving the explainable model
