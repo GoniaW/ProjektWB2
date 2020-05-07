@@ -80,5 +80,12 @@ After each improvement the model was retrained and the results obtained on the t
 
 ### Results
 
+| Model  | AUC | ACC | 
+| ------- | ------------- | ------- |
+| Xgboost | 0.8474 | 0.5897436 |
+| Basic rpart model | 0.8329 | 0.5641026 |
+| Rpart with numerical Latitude | 0.8329 |  0.5641026 |
+| 3 binary Rpart models | 0.8719 | 0.6202532 |
+|  3 binary Rpart models without site names | 0.8719 | 0.6202532 |
 
 ### Summary and conclusions 
