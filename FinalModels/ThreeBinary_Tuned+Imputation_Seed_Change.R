@@ -64,8 +64,8 @@ test <- function(seed){
   # Handling missing data in test set
   status(test_euc) # 10 NA in Surv variablet
   nrow(test_euc)
-  test_euc[is.na(test_euc[,'Surv']), 'Surv'] <- mean(test_euc[,'Surv']) 
-  test_euc[is.na(test_euc[,'PMCno']), 'PMCno'] <- mean(test_euc[,'PMCno']) 
+  # test_euc[is.na(test_euc[,'Surv']), 'Surv'] <- mean(test_euc[,'Surv']) 
+  # test_euc[is.na(test_euc[,'PMCno']), 'PMCno'] <- mean(test_euc[,'PMCno']) 
   test_euc <- na.omit(test_euc)
   nrow(test_euc)
   
@@ -75,7 +75,7 @@ test <- function(seed){
   nrow(train_euc)
   train_euc[is.na(train_euc[,'Surv']), 'Surv'] <- mean(train_euc[,'Surv']) 
   train_euc[is.na(train_euc[,'PMCno']), 'PMCno'] <- mean(train_euc[,'PMCno']) 
-  train_euc <- na.omit(train_euc)
+ # train_euc <- na.omit(train_euc)
   nrow(train_euc)
   
   #------------------------------------------------------------------
@@ -153,4 +153,4 @@ for(i in 1:N){
   print(t)
   aucs[i] <- t$auc
 }
-mean(aucs) # 0.8366782
+mean(aucs) # 0.8359324

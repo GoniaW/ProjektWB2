@@ -78,6 +78,8 @@ The third step has a scientific justification. The experiment for which the data
 
 After each improvement the model was retrained and the results obtained on the test set were saved and compared with the previous version of the model. If the new change has improved the model’s performance on the test set then it became the base for further development. Instead, if it has not improved the model’s performance, the previous version of the model was being further developed.
 
+### Model explanantion
+
 ### Results
 
 | Model  | AUC | ACC | 
