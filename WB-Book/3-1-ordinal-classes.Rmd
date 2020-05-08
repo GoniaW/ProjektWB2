@@ -71,8 +71,9 @@ As mentioned before, the explainable model was enhanced by applying existing app
 
 1. Transforming Latitude variable from factor to numeric.
 2. Splitting a multiclass classification problem into 3 binary classification problems, like explained in the An approach to ordinal classification section of this article, and using the rpart model on each of the binary problems.
-3. Selecting variables: deleting the site names and specific location tags 
-4. ???Missing data imputation - na razie nie ma ???
+3. Selecting variables: deleting the site names and specific location tags. 
+4. Imputing missing data in the training set.
+5. Tunning the model.
 
 The third step has a scientific justification. The experiment for which the data was collected was focused on finding the best seedlot for soil conservation in seasonally dry hill country. All the data in this dataset comes from New Zealand, but there is a chance that the results of such experiment would be used for other geographical regions. So far our model was making the prediction based also on specific flat map coordinates and site names, that are present both in the training and the test set. This means it would be impossible to use this model for judging seedlots of eucalypti planted outside of New Zealand. To make this possible, we have decided to take away all the variables that give away the exact position of the seedlots, leaving features such as latitude and the characteristics of plants and their habitat.
 
