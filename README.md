@@ -14,3 +14,8 @@ Projekt na Warsztaty Badawcze 2
 | oryginalny | classif.rpart | tuning | 0.6272727 | 0.8307 | Eucalyptus/ rpart_tuning.R | Ola | bez NA w Utitlity |
 | oryginalny | classif.rpart x3 (z paperu) | domyślne | - | 0.852 | Eucalyptus/ eucalyptus_original_ordinal_classification(paper)_v2.R | Gosia | preprocessing Gosi, ale z lokalizacją + usunięcie NA |
 | oryginalny | classif.xgboost | predict.type = "response", objective = "multi:softmax", nrounds = 200 | 0.5796178 | 0.8376 |  Eucalyptus/ XgbToCompare.R | Gosia | preprocessing Gosi, ale z lokalizacją + usunięcie NA (to samo co powyżej) |
+
+## Wykresy do zrobienia
+* wykres ostatecznego modelu - wyjaśnienie decyzji drzewa
+* dla konkretnego seeda porównanie wykresów AUC
+* procentowo AUC polepszenie pogorszenie dla kolejnych testowanych modeli
