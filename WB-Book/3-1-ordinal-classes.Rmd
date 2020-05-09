@@ -14,12 +14,16 @@ This paper presents various methods to make an explainable machine learning mode
 
 Our experiments are based on 'eucalyptus' dataset from OpenML. The dataset's objective is to find the best seedlot for soil conservation in seasonally dry hill country. Predictions are made depending on features such as height, diameter and survival of the plants. Target variable is ordered - it is represented by values 'low', 'average', 'good' and 'best'.
 
+-- paper structure description --
+
 
 ### Related Work
 
 #### An approach to ordinal classification
 
 ##### Ordinal classification as a regression task
+
+As described in [2], one of the most fundamental techniques is to cast target labels to a sequence of numbers. Then, a standard regression can be applied. There is an additional information about the classes in comparison to usual nominal classification. Also a metric used is different than in a classification task - mean square error used in a regression task takes into account similarities between two labels when conversion is applied. 
 
 ##### Transformation to multiple binary classification problems
 
