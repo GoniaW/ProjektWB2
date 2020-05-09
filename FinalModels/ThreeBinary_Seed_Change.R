@@ -135,18 +135,25 @@ test <- function(seed){
     responses_rpart[[i]] <-  m_pred
   }
   m_pred <- calc_prob(responses_rpart)
-  
+
   #-----------------------------------------------------------
   # Measuring the outcome
-  multiclass.roc(test_euc$Utility, m_pred) 
+  c(multiclass.roc(m_pred, as.numeric(test_euc$Utility))$auc, mse(m_pred, test_euc$Utility), acc1(m_pred, test_euc$Utility), acc2(m_pred, test_euc$Utility)) 
 }
+source("../metrics.R")
 set.seed(0)
 N <- 100
 aucs <- numeric(N)
+mses <- numeric(N)
+accs <- numeric(N)
+acc2s <- numeric(N)
+
 seeds <- runif(N, 0, 500)
 for(i in 1:N){
-  t <- test(seeds[i])
-  print(t)
-  aucs[i] <- t$auc
+  rt <- test(seeds[i])
+  aucs[i] <- rt[1]
+  mses[i] <- rt[2]
+  accs[i] <- rt[3]
+  acc2s[i] <- rt[4]
 }
-mean(aucs) #0.8363935
+c(mean(aucs),mean(mses),mean(accs),mean(acc2s))

@@ -21,35 +21,38 @@ test <- function(seed){
   # Deleting the rows with the 'none' target class
   nrow(eucalyptus)
   eucalyptus <- eucalyptus[eucalyptus$Utility!="none",]
+  eucalyptus <- subset(eucalyptus, select = -c(Abbrev, Rep, Locality, Map_Ref))
+  eucalyptus$Rainfall <- log(eucalyptus$Rainfall)
   nrow(eucalyptus)
   
   #-----------------------------
   # One hot encoding on factor variables
   eucalyptus <- createDummyFeatures(
     eucalyptus, target = "Utility",
-    cols = c("Latitude","Sp","Abbrev","Locality","Map_Ref")
+    cols = c("Latitude","Sp")
   )
   
   # dummy features makes n columns for n factor values but it should be n-1, so the excess is deleted
   colnames(eucalyptus)
-  eucalyptus <- subset(eucalyptus, select = -c(Latitude.82__32, Sp.te, Abbrev.WSh, Locality.Central_Poverty_Bay, 
-                                               Map_Ref.N151_922.226))
+  eucalyptus <- subset(eucalyptus, select = -c(Latitude.82__32, Sp.te))
+  eucalyptus$Utility <- as.character(eucalyptus$Utility)
+  eucalyptus$Utility <- ifelse(eucalyptus$Utility=="low","1",eucalyptus$Utility)
+  eucalyptus$Utility <- ifelse(eucalyptus$Utility=="average","2",eucalyptus$Utility)
+  eucalyptus$Utility <- ifelse(eucalyptus$Utility=="good","3",eucalyptus$Utility)
+  eucalyptus$Utility <- ifelse(eucalyptus$Utility=="best","4",eucalyptus$Utility)
+
   
   #-----------------------------
   # Splitting into train and test data
-  eucalyptus$Utility <- as.factor(as.character(eucalyptus$Utility))
+  #eucalyptus$Utility <- as.factor(eucalyptus$Utility)
   set.seed(seed)
-  trainIndex <- createDataPartition(eucalyptus$Utility, p = .7, 
-                                    list = FALSE, 
-                                    times = 1)
-  head(trainIndex)
-  trainIndex2 <- read.csv('trainIndex.csv')[,2]
+  trainIndex2 <- createDataPartition(eucalyptus$Utility, p = .7, 
+                                     list = FALSE, 
+                                     times = 1)
+  eucalyptus$Utility <- as.numeric(eucalyptus$Utility)
+  train_euc <- eucalyptus[ trainIndex2,]
+  test_euc <-  eucalyptus[-trainIndex2,]
   
-  train_euc <- eucalyptus[ trainIndex,]
-  test_euc <-  eucalyptus[-trainIndex,]
-  
-  #train_euc <- eucalyptus[ trainIndex2,]
-  #test_euc <-  eucalyptus[-trainIndex2,]
   
   #-----------------------------
   # Handling missing data in test set
@@ -67,12 +70,12 @@ test <- function(seed){
   
   #------------------------------------------------------------------
   # Basic rpart model
-  trainTask <- makeClassifTask(data = train_euc, target = "Utility")
-  testTask <- makeClassifTask(data = test_euc, target = "Utility")
+  trainTask <- makeRegrTask(data = train_euc, target = "Utility")
+  testTask <- makeRegrTask(data = test_euc, target = "Utility")
   
   set.seed(seed)
   rpart_learner <- makeLearner(
-    "classif.rpart",
+    "regr.rpart",
     predict.type = "response"
   )
   rpart_learner
@@ -81,14 +84,8 @@ test <- function(seed){
   result <- predict(rpart_model, testTask)
   head(result)
   
-  # Changing data type of result from factor to ordered factor
-  result$data$truth <- factor(result$data$truth, ordered = TRUE, 
-                              levels = c("low", "average", "good", "best"))
-  result$data$response <- factor(result$data$response, ordered = TRUE, 
-                                 levels = c("low", "average", "good", "best"))
-  
   # Measuring the outcome
-  c(multiclass.roc(result$data$truth,result$data$response)$auc, mse(result$data$truth, result$data$response), acc1(result$data$truth, result$data$response), acc2(result$data$truth,result$data$response)) 
+  c(multiclass.roc(result$data$truth,result$data$response)$auc, mse(result$data$truth, result$data$response), acc1(result$data$truth,round(result$data$response, 0)), acc2(result$data$truth,result$data$response)) 
 }
 source("../metrics.R")
 set.seed(0)

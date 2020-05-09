@@ -62,7 +62,7 @@ test <- function(seed){
     predict.type = "response",
     par.vals = list(
       objective = "multi:softmax",
-      nrounds = 200
+      nrounds = 5
     )
   )
   xgb_learner

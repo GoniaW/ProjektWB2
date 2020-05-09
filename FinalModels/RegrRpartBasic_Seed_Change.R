@@ -33,39 +33,31 @@ test <- function(seed){
   # dummy features makes n columns for n factor values but it should be n-1, so the excess is deleted
   colnames(eucalyptus)
   eucalyptus <- subset(eucalyptus, select = -c(Latitude.82__32, Sp.te, Abbrev.WSh, Locality.Central_Poverty_Bay, 
+                                               
                                                Map_Ref.N151_922.226))
-  
-  #-----------------------------
-  # Changing Utility factor levels to numeric values
   eucalyptus$Utility <- as.character(eucalyptus$Utility)
   eucalyptus$Utility <- ifelse(eucalyptus$Utility=="low","1",eucalyptus$Utility)
   eucalyptus$Utility <- ifelse(eucalyptus$Utility=="average","2",eucalyptus$Utility)
   eucalyptus$Utility <- ifelse(eucalyptus$Utility=="good","3",eucalyptus$Utility)
   eucalyptus$Utility <- ifelse(eucalyptus$Utility=="best","4",eucalyptus$Utility)
+
   
   #-----------------------------
   # Splitting into train and test data
-  eucalyptus$Utility <- as.factor(eucalyptus$Utility)
+  #eucalyptus$Utility <- as.factor(eucalyptus$Utility)
   set.seed(seed)
   trainIndex2 <- createDataPartition(eucalyptus$Utility, p = .7, 
                                      list = FALSE, 
                                      times = 1)
-  head(trainIndex2)
-  #write.csv(trainIndex2,'trainIndex2.csv')
-  
+  eucalyptus$Utility <- as.numeric(eucalyptus$Utility)
   train_euc <- eucalyptus[ trainIndex2,]
   test_euc <-  eucalyptus[-trainIndex2,]
   
-  # trainIndex <- read.csv('trainIndex.csv')[,2]
-  # train_euc <- eucalyptus[ trainIndex,]
-  # test_euc <-  eucalyptus[-trainIndex,]
   
   #-----------------------------
   # Handling missing data in test set
   status(test_euc) # 10 NA in Surv variablet
   nrow(test_euc)
-  # test_euc[is.na(test_euc[,'Surv']), 'Surv'] <- mean(test_euc[,'Surv']) 
-  # test_euc[is.na(test_euc[,'PMCno']), 'PMCno'] <- mean(test_euc[,'PMCno']) 
   test_euc <- na.omit(test_euc)
   nrow(test_euc)
   
@@ -73,76 +65,27 @@ test <- function(seed){
   # Handling missing data in train set
   status(train_euc) # 10 NA in Surv variablet
   nrow(train_euc)
-  train_euc[is.na(train_euc[,'Surv']), 'Surv'] <- mean(train_euc[,'Surv']) 
-  train_euc[is.na(train_euc[,'PMCno']), 'PMCno'] <- mean(train_euc[,'PMCno']) 
- # train_euc <- na.omit(train_euc)
+  train_euc <- na.omit(train_euc)
   nrow(train_euc)
   
   #------------------------------------------------------------------
-  # Three binary rpart models
+  # Basic rpart model
+  trainTask <- makeRegrTask(data = train_euc, target = "Utility")
+  testTask <- makeRegrTask(data = test_euc, target = "Utility")
   
-  #-----------------------------
-  # Self defined useful functions 
+  set.seed(seed)
+  rpart_learner <- makeLearner(
+    "regr.rpart",
+    predict.type = "response"
+  )
+  rpart_learner
   
-  convert <- function(dataset, target){
-    # Conversion of a dataset to 3 binary-class datasets
-    # Arguments:
-    # dataset - a dataframe without target variable
-    # target - a vector of target labels
-    
-    tresholds <- c(1,2,3,4)
-    tresholds <- tresholds[-length(tresholds)]
-    
-    labels <- matrix(ncol = 3, nrow = nrow(dataset))
-    for(i in 1:nrow(dataset)){
-      labels[i,] <- as.logical(as.numeric(target[i]) > (tresholds))
-    }
-    labels
-    list(cbind(dataset, a=labels[,1]), cbind(dataset, b=labels[,2]), cbind(dataset, c=labels[,3]))
-  }
+  rpart_model <- train(rpart_learner, task = trainTask)
+  result <- predict(rpart_model, testTask)
+  head(result)
   
-  calc_prob <- function(responses){
-    # Returns predicted classes
-    # Arguments:
-    # responses - list of vectors of binary-class probabilities
-    
-    a <- responses[[1]]
-    b <- responses[[2]]
-    c <- responses[[3]]
-    # a,b,c - probabilities tresholds (vectors) from model for classes
-    n <- length(a)
-    predicts <- numeric(n)
-    for(i in 1:n){
-      probs <- numeric(4)
-      probs[1] <- 1 - a[i]
-      probs[2] <- a[i] - b[i]
-      probs[3] <- b[i] - c[i]
-      probs[4] <- c[i]
-      
-      predicts[i] <- which.max(probs)
-    }
-    predicts
-  }
-  
-  #-----------------------------
-  # Training the model and predicting on training set 
-  
-  stack <- convert(train_euc[, -15], train_euc$Utility)
-  responses_rpart <- list()
-  for(i in 1:3){
-    # creates 3 models
-    print(i)
-    df <- stack[[i]]
-    target_name <- colnames(df)[ncol(df)]
-    m <- rpart(paste(c(target_name, " ~ ."), collapse = ""), data = df, parms = list(maxdepth = 6, minsplit = 16, cp = 0.01))
-    m_pred <- predict(m, test_euc[,-15])
-    responses_rpart[[i]] <-  m_pred
-  }
-  m_pred <- calc_prob(responses_rpart)
-  
-  #-----------------------------------------------------------
   # Measuring the outcome
-  c(multiclass.roc(m_pred, as.numeric(test_euc$Utility))$auc, mse(m_pred, test_euc$Utility), acc1(m_pred, test_euc$Utility), acc2(m_pred, test_euc$Utility)) 
+  c(multiclass.roc(result$data$truth,result$data$response)$auc, mse(result$data$truth, round(result$data$response,0)), acc1(result$data$truth,round(result$data$response, 0)), acc2(result$data$truth,result$data$response)) 
 }
 source("../metrics.R")
 set.seed(0)
