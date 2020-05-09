@@ -21,7 +21,7 @@ Our experiments are based on 'eucalyptus' dataset from OpenML. The dataset's obj
 
 ##### Ordinal classification as a regression task
 
-##### Transforming to multiple binary classification problems
+##### Transformation to multiple binary classification problems
 
 #### Comparing black box to linear model
 
@@ -98,3 +98,6 @@ After each improvement the model was retrained and the results obtained on the t
 ### Summary and conclusions 
 
 ### References
+
+1. Frank, Eibe & Hall, Mark. (2001). A Simple Approach to Ordinal Classification. Lecture Notes in Computer Science. 2167. 145-156. 10.1007/3-540-44795-4_13
+2. P. A. Gutiérrez, M. Pérez-Ortiz, J. Sánchez-Monedero, F. Fernández-Navarro and C. Hervás-Martínez, "Ordinal Regression Methods: Survey and Experimental Study," in IEEE Transactions on Knowledge and Data Engineering, vol. 28, no. 1, pp. 127-146, 1 Jan. 2016, doi: 10.1109/TKDE.2015.2457911.
