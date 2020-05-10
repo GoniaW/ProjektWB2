@@ -90,9 +90,10 @@ After each improvement the model was retrained and the results obtained on the t
 
 ![](3-1-graphs/CompareModels.png)
 
-Explainable models:
+**Explainable models**:
 
-| Model  | AUC | MSE | ACC | ACC1| Percent Best AUC |
+| Model  | AUC | MSE | ACC | ACC1| Percent Best AUC | 
+|-------|---|---|---|---|-----|
 | Basic rpart | 0.8259145 | 0.5284076 | 0.5835207 | 0.9797400 | 95,89% | 
 | Three binary rparts | 0.8430115 | 0.5392606 | 0.5816277 | 0.9826626 | 97,88% |
 | Regression rpart | 0.86115629	| 0.4994688 |	0.5814851	| 0.93207583 |	99,99% | 
@@ -100,9 +101,10 @@ Explainable models:
 | Regression rpart  with no location | 0.8612852 |	0.4995913	| 0.5815428 |	0.9323226 |	100,00% |
 | Regression rpart  with no location and numeric lattitide| 0.8612474 | 0.4993377 |	0.5816065 |	0.9322628 |	100,00% |
 
-Black box models:
+**Black box models**:
 
 | Model  | AUC | MSE | ACC | ACC1| Percent Best AUC | 
+|-------|---|---|---|---|-----|
 | Xgboost | 0.8589771 | 0.4466546 | 0.6247675 | 0.9873244 | 99.73% |
 | Xgboost with nrounds=5 | 0.8405102 | 0.4997935 | 0.6043936 | 0.9830193 | 97,59% | 
 
