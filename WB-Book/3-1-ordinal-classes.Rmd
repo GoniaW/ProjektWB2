@@ -23,9 +23,13 @@ Our experiments are based on 'eucalyptus' dataset from OpenML. The dataset's obj
 
 ##### Ordinal classification as a regression task
 
-As described in [2], one of the most fundamental techniques is to cast target labels to a sequence of numbers. Then, a standard regression can be applied. There is an additional information about the classes in comparison to usual nominal classification. Also a metric used is different than in a classification task - mean square error used in a regression task takes into account similarities between two labels when conversion is applied. 
+As described in [2], one of the most fundamental techniques is to cast target labels to a sequence of numbers. For example $\{low, good, best\}$ changes to $\{0,1,2\}$. Then, standard regression can be applied. There is additional information about the classes in comparison to the usual nominal classification. Also, a metric used is different than in a classification task - mean square error used in a regression task takes into account similarities between two labels when a conversion is applied. 
 
 ##### Transformation to multiple binary classification problems
+
+Ordinal classification taxonomy given in [2] specifies decompositions of classification task into binary problems as a separate technique to cope with ordinal classification. A more detailed algorithm and performance test are presented in [1] which suggests better scores obtained using binary decomposition than using a single model during a test on multiple datasets.
+
+Based on [1], as a binary decomposition we define a conversion of a target classes $\{low, good, best\}$ into pairs of binary classes (True/False) $\{\{False, False\}, \{True, False\}, \{True, True\}\}$ determining whether outcome is better than $low$ and better than $good$. After classification is made, probabilites for original classes are calculated as explained in [1], [2]. 
 
 #### Comparing black box to linear model
 
