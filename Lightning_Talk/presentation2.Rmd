@@ -54,6 +54,11 @@ knitr::opts_chunk$set(echo = FALSE)
 ![Decision Tree Diagram](model_expalanation.jpg)
 
 ## Conclusions
+Our model:
+
+- lower computational cost compared to black box
+- comparable/better results after presented methods applied
+- ability to explain decisions
 
 
 
