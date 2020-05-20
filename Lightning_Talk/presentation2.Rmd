@@ -32,6 +32,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Model Explanation
 
+[Decision Tree Diagram](model_expalanation.jpg)
+
 ## Conclusions
 
 

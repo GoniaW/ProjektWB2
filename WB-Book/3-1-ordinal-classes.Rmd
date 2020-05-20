@@ -61,7 +61,7 @@ The black box model chosen for comparison is an extreme gradient boosting model.
 | Predict-Type | response |
 | Hyperparameters | nrounds=200,verbose=0,objective=multi:softmax |
 
-The quality of prediction was measured using the AUC (area under ROC curve) measure. This provides the base for this research, to which other models’ results will be compared to.
+The quality of prediction was measured using the AUC (area under ROC curve) measure. This provides the base for this research, to which other models’ results will be compared to. Results of other metrics suitable for ordinal classification task [3] were presented in table.
 
 #### Running the basic version the explainable model
 
@@ -127,3 +127,4 @@ After each improvement the model was retrained and the results obtained on the t
 
 1. Frank, Eibe & Hall, Mark. (2001). A Simple Approach to Ordinal Classification. Lecture Notes in Computer Science. 2167. 145-156. 10.1007/3-540-44795-4_13
 2. P. A. Gutiérrez, M. Pérez-Ortiz, J. Sánchez-Monedero, F. Fernández-Navarro and C. Hervás-Martínez, "Ordinal Regression Methods: Survey and Experimental Study," in IEEE Transactions on Knowledge and Data Engineering, vol. 28, no. 1, pp. 127-146, 1 Jan. 2016, doi: 10.1109/TKDE.2015.2457911.
+3. Gaudette L., Japkowicz N. (2009) Evaluation Methods for Ordinal Classification. In: Gao Y., Japkowicz N. (eds) Advances in Artificial Intelligence. Canadian AI 2009. Lecture Notes in Computer Science, vol 5549. Springer, Berlin, Heidelberg
