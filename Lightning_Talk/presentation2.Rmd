@@ -15,19 +15,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Plan
 
-- Research purpose
-- Ordinal classification
-- Dataset
-- Methodology
-- Results
-- Model explanation
+1. Research purpose
+2. Ordinal classification
+3. Dataset
+4. Methodology
+5. Results
+6. Model explanation
 
 ## Research purpose
 
 
 ## Ordinal classification
 
-## Dataset
+## Dataset - Eucalyptus
+
+- OpenML
+- 556 observations of 87 variables
+- ordinal target: Low, Average, Good, Best
+- target meaning: suitability for soil conditions
 
 ## Methodology
 
@@ -50,6 +55,5 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Conclusions
 
-##
 
 
