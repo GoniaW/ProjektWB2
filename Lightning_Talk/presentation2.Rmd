@@ -1,0 +1,35 @@
+---
+title: "Building an explainable model for ordinal classification. Meeting black box
+  model performance levels.\v  \v"
+author: "Karol Saputa -- Małgorzata Wachulec -- Aleksandra Wichrowska"
+date: "5/20/2020"
+output:
+  beamer_presentation:
+    theme: "Singapore"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Presentation plan
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Research purpose
+
+
+## Ordinal classification
+
+## Dataset
+
+## Methodology
+
+## Results
+
+## Conclusions
+
+
