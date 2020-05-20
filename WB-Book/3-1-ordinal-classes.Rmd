@@ -96,7 +96,9 @@ After each improvement the model was retrained and the results obtained on the t
 
 ### Results
 
-![](3-1-graphs/CompareModels.png)
+![Results of different techniques in improving model performance in comparison to black box](3-1-graphs/CompareModels.png)
+
+
 
 **Explainable models**:
 
