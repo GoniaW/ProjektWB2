@@ -126,7 +126,10 @@ Based on our final model a graph of decisions was created which is presented bel
 
 ![Graph of a decision tree structure of our model](3-1-graphs/DecisionTree.jpg)
 
-### Summary and conclusions 
+### Summary and conclusions
+It is important to emphasize methods where domain knowledge and application of different machine learning techniques, as introduced in our work, can get good results as well as bring less computational cost and possibility to understand and explain decisions made to solve a problem. 
+
+Different methods, as in [2] could also be applied in the future. In our findings, what is emphasized in the title of the article, achieving results similar to the black box was significant.
 
 ### References
 
