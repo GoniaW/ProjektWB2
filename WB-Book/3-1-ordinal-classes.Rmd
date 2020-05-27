@@ -4,6 +4,9 @@
 *Authors: Karol Saputa, Małgorzata Wachulec, Aleksandra Wichrowska (Warsaw University of Technology)*
 
 ### Abstract
+Achieving higher and higher metrics result by using bigger and more complex models is becoming popular.
+However, it is still possible to build accurate models that are less complex. Hence, possible to explain and interpet easily.
+For a specific task of ordinal classification and examplary dataset of Eucaluptus trees, we provide such model (with AUC metric better than considered black box model) with explanation of techniques applied.
 
 
 ### Introduction and Motivation
