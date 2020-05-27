@@ -121,6 +121,8 @@ After each improvement the model was retrained and the results obtained on the t
 
 ### Model explanantion
 
+![Graph of a decision tree structure of our model](3-1-graphs/DecisionTree.jpg)
+
 ### Summary and conclusions 
 
 ### References
