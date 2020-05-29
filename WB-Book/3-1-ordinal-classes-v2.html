@@ -370,7 +370,7 @@ summary {
 <p><em>Authors: Karol Saputa, Małgorzata Wachulec, Aleksandra Wichrowska (Warsaw University of Technology)</em></p>
 <div id="abstract" class="section level3">
 <h3>Abstract</h3>
-<p>Achieving higher and higher metrics results by using bigger and more complex models is becoming popular. However, it is still possible to build accurate models that are less complex. Hence, possible to explain and interpret easily. For a specific task of ordinal classification and exemplary dataset of Eucalyptus, we provide a model (with AUC metric better than considered black box model) with an explanation of techniques applied.</p>
+<p>Achieving higher and higher metrics results by using bigger and more complex models is becoming popular. However, it is still possible to build accurate models that are less complex. Hence, possible to explain and interpret easily. For a specific task of ordinal classification and exemplary dataset of Eucalypti, we provide a model (with AUC metric better than considered black box model) with an explanation of techniques applied.</p>
 </div>
 <div id="introduction-and-motivation" class="section level3">
 <h3>1. Introduction and Motivation</h3>
@@ -502,7 +502,7 @@ summary {
 <h4>3.4. Improving the explainable model</h4>
 <p>As mentioned before, the explainable model was enhanced by applying existing approaches to ordinal classification, feature transformation and selection and missing data imputation. The refinement process consisted of, but was not limited to, the following:</p>
 <ol style="list-style-type: decimal">
-<li>Splitting a multiclass classification problem into 3 binary classification problems, like explained in the An approach to ordinal classification section of this article, and using the rpart model on each of the binary problems.</li>
+<li>Splitting a multiclass classification problem into 3 binary classification problems - binary decomposition with 3 rpart models (as described in section 2.2)</li>
 <li>Changing the levels of the target variable:“low”, “average”, “good”, “best” into numeric values: 1, 2, 3, 4, respectively and running a regression rpart model.</li>
 <li>Imputing missing data in the training set.</li>
 <li>Selecting variables: deleting the site names and specific location tags.</li>
@@ -600,20 +600,20 @@ summary {
 </thead>
 <tbody>
 <tr class="odd">
-<td>Xgboost</td>
-<td>0.8590</td>
-<td>0.4467</td>
-<td>0.6248</td>
-<td>0.9873</td>
-<td>104.00%</td>
-</tr>
-<tr class="even">
 <td>Xgboost with nrounds=5</td>
 <td>0.8405</td>
 <td>0.4998</td>
 <td>0.6044</td>
 <td>0.9830</td>
 <td>101.77%</td>
+</tr>
+<tr class="even">
+<td>Xgboost</td>
+<td>0.8590</td>
+<td>0.4467</td>
+<td>0.6248</td>
+<td>0.9873</td>
+<td>104.00%</td>
 </tr>
 </tbody>
 </table>

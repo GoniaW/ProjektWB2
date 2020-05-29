@@ -6,7 +6,7 @@
 ### Abstract
 Achieving higher and higher metrics results by using bigger and more complex models is becoming popular.
 However, it is still possible to build accurate models that are less complex. Hence, possible to explain and interpret easily.
-For a specific task of ordinal classification and exemplary dataset of Eucalyptus, we provide a model (with AUC metric better than considered black box model) with an explanation of techniques applied.
+For a specific task of ordinal classification and exemplary dataset of Eucalypti, we provide a model (with AUC metric better than considered black box model) with an explanation of techniques applied.
 
 
 ### 1. Introduction and Motivation
@@ -88,7 +88,7 @@ As this model cannot be run with missing data, they were deleted from the traini
 As mentioned before, the explainable model was enhanced by applying existing approaches to ordinal classification, feature transformation and selection and missing data imputation. The refinement process consisted of, but was not limited to, the following:
 
 
-1. Splitting a multiclass classification problem into 3 binary classification problems, like explained in the An approach to ordinal classification section of this article, and using the rpart model on each of the binary problems.
+1. Splitting a multiclass classification problem into 3 binary classification problems - binary decomposition with 3 rpart models (as described in section 2.2)
 2. Changing the levels of the target variable:"low", "average", "good", "best" into numeric values: 1, 2, 3, 4, respectively and running a regression rpart model.
 3. Imputing missing data in the training set.
 4. Selecting variables: deleting the site names and specific location tags. 
@@ -118,8 +118,8 @@ Results obtained for each model are shown in the tables below:
 
 | Model  | AUC | MSE | ACC | ACC1| Percent Basic Explainable Model's AUC | 
 |-------------------------|---|---|---|---|-----|
-| Xgboost | 0.8590 | 0.4467 | 0.6248 | 0.9873 | 104.00% |
 | Xgboost with nrounds=5 | 0.8405 | 0.4998 | 0.6044 | 0.9830 | 101.77% | 
+| Xgboost | 0.8590 | 0.4467 | 0.6248 | 0.9873 | 104.00% |
 
 We have visualised the AUC measure improvements, in comparison to the basic rpart (decision tree) model, on the graph below. As shown on the graph, after adding the improvements, the explainable model was able to outperform the black box model, which was the point of this study. The best model is a decision tree, which is defined for a regression task, and which includes variable selection (taking away specific location tags as explained in the methodology section).
 
