@@ -6,7 +6,7 @@
 ### Abstract
 Achieving higher and higher metrics results by using bigger and more complex models is becoming popular.
 However, it is still possible to build accurate models that are less complex. Hence, possible to explain and interpret easily.
-For a specific task of ordinal classification and exemplary dataset of Eucalypti, we provide a model (with AUC metric better than considered black box model) with an explanation of techniques applied.
+For a specific task of ordinal classification and exemplary dataset of Eucalyptus, we provide a model (with AUC metric better than considered black box model) with an explanation of techniques applied.
 
 
 ### 1. Introduction and Motivation
