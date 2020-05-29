@@ -1,4 +1,4 @@
-## Building an explainable model for ordinal classification. Meeting black box model performance levels.
+## Building an explainable model for ordinal classification on Eucalyptus dataset. Meeting black box model performance levels.
 
 
 *Authors: Karol Saputa, Małgorzata Wachulec, Aleksandra Wichrowska (Warsaw University of Technology)*
@@ -101,7 +101,7 @@ After each improvement the model was retrained and the results obtained on the t
 
 ### Results
 
-![Results of different techniques in improving model performance in comparison to black box](3-1-graphs/CompareModels.png)
+![Results of different techniques in improving model performance in comparison to black box. A decision tree was used as a baseline.](3-1-graphs/CompareModels_2.png)
 
 
 
