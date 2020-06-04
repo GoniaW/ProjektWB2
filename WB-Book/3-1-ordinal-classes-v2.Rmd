@@ -135,9 +135,21 @@ We have visualised the AUC measure improvements, in comparison to the basic rpar
 
 ### Model explanantion
 
-Based on our final model a graph of decisions was created which is presented below. The most important, first divisions are made based on Vigour and Crown variables. Decisions can be reused to support other models or as a support for decision making e.g. in building environment for Eucalypti.
+Our final explainable model is a simple regression decision tree. The interpretation of tree-based models is very simple: we start from the root node and go to the next nodes via the edges, basing on the decisions made by model. Subsequent decisions are connected by 'AND'. When we reach the leaf, we can read predicted value of the target. We can also easily compare the prediction of various "what if" scenarios. Moreover, there is no need to transform features used in model - there is no point in neither taking the logarithm of a variable nor normalize them in any other way. 
+
+As described in [5], one of main advantages of decision trees is natural visualization: we create a graph based on choosen model. The graph is presented below. Depth of this model is 6. First divisions are made based on Vigour and Crown variables. We can conclude that small values of vigour leads to "low" or "average" utility feature. 
 
 ![Graph of a decision tree structure of our model](3-1-graphs/DecisionTree.jpg)
+
+Looking into model features' importance we can extract variables used by our model. The most important features are:
+
+- vigour (73.3%)
+- stem form (7.9%)
+- height (7.6%)
+- seedlot number (4.1%)
+- survival  (2.6%)
+- crown form (2.3%)
+- year of planting (2.2%)
 
 ### Summary and conclusions
 
@@ -155,3 +167,4 @@ Different methods, as in [2] could also be applied in the future, to further imp
 2. P. A. Gutiérrez, M. Pérez-Ortiz, J. Sánchez-Monedero, F. Fernández-Navarro and C. Hervás-Martínez, "Ordinal Regression Methods: Survey and Experimental Study," in IEEE Transactions on Knowledge and Data Engineering, vol. 28, no. 1, pp. 127-146, 1 Jan. 2016, doi: 10.1109/TKDE.2015.2457911.
 3. Gaudette L., Japkowicz N. (2009) Evaluation Methods for Ordinal Classification. In: Gao Y., Japkowicz N. (eds) Advances in Artificial Intelligence. Canadian AI 2009. Lecture Notes in Computer Science, vol 5549. Springer, Berlin, Heidelberg
 4. Rudin, C. Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. Nat Mach Intell
+5. Molnar, C. Interpretable Machine Learning. A Guide for Making Black Box Models Explainable.
