@@ -412,6 +412,7 @@ summary {
 <h4>Running the black box model</h4>
 <p>The black box model chosen for comparison is an extreme gradient boosting model. After the initial preprocessing the xgboost model was trained on the training set and used to predict results on the test set. As this model can only deal with numerical data, categorical (factor) variables were transformed using one hot encoding. The training proces and prediction were done using the mlr package in R, and the exact model specifications were the following:</p>
 <table>
+<caption>Parameters of extreme gradient boosting model</caption>
 <thead>
 <tr class="header">
 <th>Category</th>
@@ -455,6 +456,7 @@ summary {
 <h4>Running the basic version the explainable model</h4>
 <p>We have chosen a tree model to be the considered explainable model, its exact specifications were the following:</p>
 <table>
+<caption>Parameters of decision tree model</caption>
 <colgroup>
 <col width="44%"></col>
 <col width="55%"></col>
@@ -517,6 +519,7 @@ summary {
 <p>Results obtained for each model are shown in the tables below:</p>
 <p><strong>Explainable models</strong>:</p>
 <table>
+<caption>Metrics results for white-box models tested</caption>
 <colgroup>
 <col width="37%"></col>
 <col width="4%"></col>
@@ -588,6 +591,7 @@ summary {
 </table>
 <p><strong>Black box models</strong>:</p>
 <table>
+<caption>Metrics results for black-box models tested</caption>
 <thead>
 <tr class="header">
 <th>Model</th>

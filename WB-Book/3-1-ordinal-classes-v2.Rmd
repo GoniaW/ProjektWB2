@@ -65,6 +65,8 @@ The black box model chosen for comparison is an extreme gradient boosting model.
 | Predict-Type | response |
 | Hyperparameters | nrounds=200,verbose=0,objective=multi:softmax |
 
+Table: Parameters of extreme gradient boosting model
+
 The quality of prediction was measured using the AUC (area under ROC curve) measure. We have also used other metrics suitable for ordinal classification task [3] and the results of all of the models are presented in table in the Results section of this article. However, AUC is the measure that we used to assess and compare each considered model. The AUC measure achieved by the black box is the one we tried to top using a simpler explainable model. 
 
 #### Running the basic version the explainable model
@@ -80,6 +82,8 @@ We have chosen a tree model to be the considered explainable model, its exact sp
 | Properties | twoclass,multiclass,missings,numerics,factors,ordered,prob,weights,featimp |
 | Predict-Type |response |
 | Hyperparameters | xval=0 |
+
+Table: Parameters of decision tree model
 
 As this model cannot be run with missing data, they were deleted from the training set before training the model. Another step was deleting one from each of the one-hot-encoded variables (the default function transforms variable with n factor levels into n columns, but n-1 columns are sufficient as the n-th column is a linear combination of the remaining n-1 columns). This model performed worse than the black box model - the outcomes are presented in the Results section of this article. The AUC measure achieved by this model provides the base for this research, to which other models’ results will be compared to.
 
@@ -113,6 +117,8 @@ Results obtained for each model are shown in the tables below:
 | Regression rpart  with no location | 0.8613 |	0.4996 | 0.5815 |	0.9323 |	104.28% |
 | Regression rpart  with no location and numeric lattitide| 0.8612 | 0.4993 |	0.5816 |	0.9323 |	104.28% |
 
+Table: Metrics results for white-box models tested
+
 
 **Black box models**:
 
@@ -120,6 +126,8 @@ Results obtained for each model are shown in the tables below:
 |-------------------------|---|---|---|---|-----|
 | Xgboost with nrounds=5 | 0.8405 | 0.4998 | 0.6044 | 0.9830 | 101.77% | 
 | Xgboost | 0.8590 | 0.4467 | 0.6248 | 0.9873 | 104.00% |
+
+Table: Metrics results for black-box models tested
 
 We have visualised the AUC measure improvements, in comparison to the basic rpart (decision tree) model, on the graph below. As shown on the graph, after adding the improvements, the explainable model was able to outperform the black box model, which was the point of this study. The best model is a decision tree, which is defined for a regression task, and which includes variable selection (taking away specific location tags as explained in the methodology section).
 
